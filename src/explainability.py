@@ -15,9 +15,7 @@ matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 
 
-# ──────────────────────────────────────────────────────────────
 # SHAP computation
-# ──────────────────────────────────────────────────────────────
 
 def compute_shap_values(model, X_test, feature_names: list,
                         max_samples: int = 1000) -> dict:
@@ -73,9 +71,7 @@ def compute_shap_values(model, X_test, feature_names: list,
     }
 
 
-# ──────────────────────────────────────────────────────────────
 # Plotting helpers
-# ──────────────────────────────────────────────────────────────
 
 def plot_shap_summary(shap_dict: dict, save_path: str) -> None:
     """Beeswarm summary plot."""
