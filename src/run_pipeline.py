@@ -3,7 +3,7 @@ run_pipeline.py – 8-stage orchestrator for the Patient Readmission Prediction 
 
 Usage:
     cd patient-readmission/
-    python -m src.run_pipeline          # or  python src/run_pipeline.py
+    python src/run_pipeline.py         
 """
 
 import os, sys, json, time, joblib
