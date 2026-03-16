@@ -82,7 +82,7 @@ Built a 7-tab Streamlit app covering:
 
 I've documented everything transparently because honest ML is the only kind that should be deployed in healthcare.
 
-🔗 **GitHub:** [link]
+🔗 **GitHub:** https://github.com/Folarinosuolale/patient-readmission
 🚀 **Live Demo:** [link]
 
 ---
@@ -101,6 +101,6 @@ Built on 99,343 real patient encounters with full SHAP explainability, fairness 
 
 Key insight: picking the right threshold matters more than picking the right model.
 
-🔗 [GitHub link] | 🚀 [Live demo link]
+🔗 https://github.com/Folarinosuolale/patient-readmission | 🚀 [Live demo link]
 
 #MachineLearning #HealthcareAI #DataScience #SHAP #Streamlit
