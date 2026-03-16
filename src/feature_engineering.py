@@ -17,9 +17,7 @@ import category_encoders as ce
 
 from src.data_loader import map_icd9_to_group, MEDICATION_COLS
 
-# ──────────────────────────────────────────────────────────────
 # Diagnosis grouping
-# ──────────────────────────────────────────────────────────────
 
 def group_diagnoses(df: pd.DataFrame) -> pd.DataFrame:
     """Map diag_1 / diag_2 / diag_3 to clinical group names."""
@@ -31,9 +29,7 @@ def group_diagnoses(df: pd.DataFrame) -> pd.DataFrame:
     return df
 
 
-# ──────────────────────────────────────────────────────────────
 # Medication aggregation
-# ──────────────────────────────────────────────────────────────
 
 def encode_medications(df: pd.DataFrame) -> pd.DataFrame:
     """Aggregate 23 medication columns into summary features."""
@@ -63,9 +59,7 @@ def encode_medications(df: pd.DataFrame) -> pd.DataFrame:
     return df
 
 
-# ──────────────────────────────────────────────────────────────
 # Derived clinical features
-# ──────────────────────────────────────────────────────────────
 
 _AGE_MAP = {
     "[0-10)": 5, "[10-20)": 15, "[20-30)": 25, "[30-40)": 35,
@@ -77,7 +71,7 @@ _AGE_MAP = {
 def create_derived_features(df: pd.DataFrame) -> pd.DataFrame:
     """Engineer clinically-motivated features."""
 
-    # --- Prior utilisation ------------------------------------------------
+    # --- Prior utilisation -----
     df["total_visits_prior"] = (
         df.get("number_outpatient", 0)
         + df.get("number_emergency", 0)
@@ -85,7 +79,7 @@ def create_derived_features(df: pd.DataFrame) -> pd.DataFrame:
     )
     df["high_utilizer"] = (df["total_visits_prior"] >= 3).astype(int)
 
-    # --- Diagnosis-level flags -------------------------------------------
+    # --- Diagnosis-level flags ----
     if "diag_1" in df.columns:
         df["diabetes_primary"] = (
             df["diag_1"].astype(str).str.startswith("250")
@@ -101,24 +95,24 @@ def create_derived_features(df: pd.DataFrame) -> pd.DataFrame:
     else:
         df["num_comorbidities"] = 0
 
-    # --- Hospitalisation flags -------------------------------------------
+    # --- Hospitalisation flags ----
     if "time_in_hospital" in df.columns:
         df["long_stay"] = (df["time_in_hospital"] > 7).astype(int)
 
     if "admission_type_id" in df.columns:
         df["emergency_admission"] = (df["admission_type_id"] == 1).astype(int)
 
-    # --- Age numeric -----------------------------------------------------
+    # --- Age numeric ----
     if "age" in df.columns:
         df["age_numeric"] = df["age"].map(_AGE_MAP).fillna(55)
 
-    # --- change & diabetesMed as binary ----------------------------------
+    # --- change & diabetesMed as binary ----
     if "change" in df.columns:
         df["med_changed"] = (df["change"] == "Ch").astype(int)
     if "diabetesMed" in df.columns:
         df["on_diabetes_med"] = (df["diabetesMed"] == "Yes").astype(int)
 
-    # --- A1Cresult & max_glu_serum as ordinal ----------------------------
+    # --- A1Cresult & max_glu_serum as ordinal ----
     if "A1Cresult" in df.columns:
         a1c_map = {"None": 0, "Norm": 1, ">7": 2, ">8": 3}
         df["a1c_ordinal"] = df["A1Cresult"].map(a1c_map).fillna(0).astype(int)
@@ -134,9 +128,7 @@ def create_derived_features(df: pd.DataFrame) -> pd.DataFrame:
     return df
 
 
-# ──────────────────────────────────────────────────────────────
 # Encoding + scaling + split
-# ──────────────────────────────────────────────────────────────
 
 # Columns to drop before modelling (raw / ID columns superseded by features)
 _DROP_BEFORE_MODEL = [
@@ -178,32 +170,32 @@ def prepare_features(
     age_series = df["age_numeric"].copy() if "age_numeric" in df.columns else pd.Series(55, index=df.index)
     gender_series = df["gender"].copy() if "gender" in df.columns else pd.Series("Unknown", index=df.index)
 
-    # ---- Separate target ------------------------------------------------
+    # ---- Separate target ------
     y = df[target_col].values
     df = df.drop(columns=[target_col], errors="ignore")
 
-    # ---- Encode gender --------------------------------------------------
+    # ---- Encode gender ------
     if "gender" in df.columns:
         df["gender_male"] = (df["gender"] == "Male").astype(int)
 
-    # ---- Target-encode high-cardinality categoricals --------------------
+    # ---- Target-encode high-cardinality categoricals ------
     cat_cols_to_encode = [
         c for c in ["admission_type", "discharge_disposition", "admission_source",
                      "medical_specialty", "diag_1_group", "diag_2_group", "diag_3_group"]
         if c in df.columns
     ]
 
-    # ---- Drop raw / superseded columns ----------------------------------
+    # ---- Drop raw / superseded columns ------
     drop_existing = [c for c in _DROP_BEFORE_MODEL if c in df.columns]
     df = df.drop(columns=drop_existing, errors="ignore")
 
-    # ---- Ensure only numeric columns remain (safety) --------------------
+    # ---- Ensure only numeric columns remain (safety) -----
     non_numeric = df.select_dtypes(exclude=[np.number]).columns.tolist()
     if non_numeric:
         print(f"  ⚠  Dropping unexpected non-numeric columns: {non_numeric}")
         df = df.drop(columns=non_numeric)
 
-    # ---- Train / test split (stratified) --------------------------------
+    # ---- Train / test split (stratified) ------
     X_train, X_test, y_train, y_test = train_test_split(
         df, y, test_size=test_size, random_state=random_state, stratify=y,
     )
@@ -211,7 +203,7 @@ def prepare_features(
     print(f"  Split: {len(X_train):,} train / {len(X_test):,} test  "
           f"(positive rate: train {y_train.mean():.3f}, test {y_test.mean():.3f})")
 
-    # ---- Target encoding (fit on train only) ----------------------------
+    # ---- Target encoding (fit on train only) ----
     enc_cols = [c for c in cat_cols_to_encode if c in X_train.columns]
     encoder = None
     if enc_cols:
@@ -220,13 +212,13 @@ def prepare_features(
         X_test = encoder.transform(X_test)
         print(f"  Target-encoded {len(enc_cols)} categorical columns")
 
-    # ---- Standard scaling -----------------------------------------------
+    # ---- Standard scaling -----
     scaler = StandardScaler()
     feature_names = X_train.columns.tolist()
     X_train_scaled = scaler.fit_transform(X_train)
     X_test_scaled = scaler.transform(X_test)
 
-    # ---- Build artifacts dict -------------------------------------------
+    # ---- Build artifacts dict -----
     artifacts = {
         "scaler": scaler,
         "encoder": encoder,
