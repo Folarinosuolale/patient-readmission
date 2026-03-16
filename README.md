@@ -2,6 +2,7 @@
 
 Explainable ML system for predicting **30-day hospital readmission risk** in diabetic patients, with SHAP-based explanations and fairness auditing across race and age groups.
 
+> **Live Dashboard** - [View the interactive Streamlit app](https://patient-readmission-fo.streamlit.app/)
 ---
 
 ## Problem Statement
@@ -82,14 +83,30 @@ Key feature groups:
 ### 1. ICD-9 Diagnosis Grouping
 The three diagnosis columns (`diag_1`, `diag_2`, `diag_3`) are mapped from raw ICD-9 codes to 18 clinical groups:
 
-| Group | ICD-9 Range |
-|---|---|
-| Circulatory | 390–459 |
-| Respiratory | 460–519 |
-| Diabetes | 250–250 |
-| Digestive | 520–579 |
-| Injury | 800–999 |
-| … | … |
+| Group | ICD-9 Range | Description |
+|---|---|---|
+| Infectious | 1–139 | Infectious and parasitic diseases |
+| Neoplasms | 140–239 | Cancers and tumours |
+| Endocrine_Other | 240–249 | Non-diabetes endocrine disorders |
+| Diabetes | 250–250 | Primary diabetes codes |
+| Endocrine_Post | 251–279 | Post-diabetes endocrine and metabolic |
+| Blood | 280–289 | Blood and blood-forming organ diseases |
+| Mental | 290–319 | Mental disorders |
+| Nervous | 320–389 | Nervous system and sense organ diseases |
+| Circulatory | 390–459 | Circulatory system diseases |
+| Respiratory | 460–519 | Respiratory system diseases |
+| Digestive | 520–579 | Digestive system diseases |
+| Genitourinary | 580–629 | Genitourinary system diseases |
+| Pregnancy | 630–679 | Pregnancy, childbirth and puerperium |
+| Skin | 680–709 | Skin and subcutaneous tissue diseases |
+| Musculoskeletal | 710–739 | Musculoskeletal and connective tissue |
+| Congenital | 740–759 | Congenital anomalies |
+| Perinatal | 760–779 | Perinatal conditions |
+| Ill_Defined | 780–799 | Symptoms, signs and ill-defined conditions |
+| Injury | 800–999 | Injury and poisoning |
+| External | E/V prefix | External causes and supplemental codes |
+| Other | — | Unrecognised or unparseable codes |
+
 
 ### 2. Medication Aggregation
 23 individual drug columns (metformin, insulin, glipizide…) are compressed into:
