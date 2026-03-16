@@ -64,14 +64,14 @@ def main():
     y_prob = model.predict_proba(X_test)[:, 1]
     auc = roc_auc_score(y_test, y_prob)
 
-    # ── Default threshold baseline ────────────────────────────────────────────
+    # ── Default threshold baseline ──────
     y_default = (y_prob >= 0.5).astype(int)
     print(f"\n  Default threshold (0.50):")
     print(f"    AUC    = {auc:.4f}")
     print(f"    Recall = {recall_score(y_test, y_default, zero_division=0):.4f}")
     print(f"    F1     = {f1_score(y_test, y_default, zero_division=0):.4f}")
 
-    # ── Youden's J threshold ──────────────────────────────────────────────────
+    # ── Youden's J threshold ──────
     chosen_t = find_youden_threshold(y_test, y_prob)
     y_final  = (y_prob >= chosen_t).astype(int)
 
@@ -93,7 +93,7 @@ def main():
     print(f"      TN={tn}  FP={fp}")
     print(f"      FN={fn}  TP={tp}")
 
-    # ── Update pipeline_results.json ─────────────────────────────────────────
+    # ── Update pipeline_results.json ─────
     results_path = MODELS_DIR / "pipeline_results.json"
     results = json.loads(results_path.read_text())
 
@@ -111,7 +111,7 @@ def main():
     results_path.write_text(json.dumps(results, indent=2))
     print(f"\n  Updated pipeline_results.json ✓")
 
-    # ── Update confusion_matrices.json ────────────────────────────────────────
+    # ── Update confusion_matrices.json ─────
     cm_path = MODELS_DIR / "confusion_matrices.json"
     cm_data = json.loads(cm_path.read_text())
     cm_data["optimal_threshold"] = {
@@ -122,7 +122,7 @@ def main():
     cm_path.write_text(json.dumps(cm_data, indent=2))
     print(f"  Updated confusion_matrices.json ✓")
 
-    # ── Save standalone threshold.json ────────────────────────────────────────
+    # ── Save standalone threshold.json ─────
     threshold_path = MODELS_DIR / "threshold.json"
     threshold_path.write_text(json.dumps({"optimal_threshold": round(chosen_t, 4)}, indent=2))
     print(f"  Saved threshold.json ✓")
