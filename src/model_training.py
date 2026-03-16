@@ -28,9 +28,8 @@ from imblearn.over_sampling import SMOTE
 optuna.logging.set_verbosity(optuna.logging.WARNING)
 warnings.filterwarnings("ignore", category=UserWarning)
 
-# ──────────────────────────────────────────────────────────────
+
 # Base model catalogue
-# ──────────────────────────────────────────────────────────────
 
 def get_base_models(scale_pos_weight: float = 8.0) -> dict:
     """Return a dict of named baseline models."""
@@ -55,9 +54,8 @@ def get_base_models(scale_pos_weight: float = 8.0) -> dict:
     }
 
 
-# ──────────────────────────────────────────────────────────────
+
 # Evaluation helpers
-# ──────────────────────────────────────────────────────────────
 
 def evaluate_model(model, X, y, name: str) -> dict:
     """Compute full evaluation metrics on a hold-out set."""
@@ -86,9 +84,8 @@ def _roc_data(y_true, y_prob, name: str) -> dict:
             "auc": roc_auc_score(y_true, y_prob)}
 
 
-# ──────────────────────────────────────────────────────────────
+
 # Model comparison (5-fold CV + final test evaluation)
-# ──────────────────────────────────────────────────────────────
 
 def compare_models(X_train, y_train, X_train_res, y_train_res,
                    X_test, y_test,
@@ -157,9 +154,8 @@ def compare_models(X_train, y_train, X_train_res, y_train_res,
     }
 
 
-# ──────────────────────────────────────────────────────────────
+
 # Optuna hyper-parameter tuning
-# ──────────────────────────────────────────────────────────────
 
 def tune_best_model(X_train, y_train, X_train_res, y_train_res,
                     X_test, y_test,
@@ -270,9 +266,8 @@ def tune_best_model(X_train, y_train, X_train_res, y_train_res,
     return tuned_model, tuned_metrics, study
 
 
-# ──────────────────────────────────────────────────────────────
+
 # Fairness analysis
-# ──────────────────────────────────────────────────────────────
 
 def compute_fairness_metrics(y_true, y_pred, y_prob,
                              sensitive_feature, group_name: str) -> dict:
