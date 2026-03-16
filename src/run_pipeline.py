@@ -41,23 +41,23 @@ def main():
     t0 = time.time()
     _ensure_dirs()
 
-    # ════════════════════════════════════════════════════════════
+    
     # [1/8]  Load and preprocess
-    # ════════════════════════════════════════════════════════════
+    
     print("\n[1/8] Loading and preprocessing data...")
     df = run_preprocessing(DATA_DIR)
 
-    # ════════════════════════════════════════════════════════════
+    
     # [2/8]  Feature engineering
-    # ════════════════════════════════════════════════════════════
+    
     print("\n[2/8] Engineering features...")
     df = group_diagnoses(df)
     df = encode_medications(df)
     df = create_derived_features(df)
 
-    # ════════════════════════════════════════════════════════════
+    
     # [3/8]  Prepare features (encode, scale, split)
-    # ════════════════════════════════════════════════════════════
+    
     print("\n[3/8] Preparing features...")
     X_train, X_test, y_train, y_test, feature_names, artifacts = prepare_features(df)
 
@@ -75,9 +75,9 @@ def main():
         "feature_names": feature_names,
     }
 
-    # ════════════════════════════════════════════════════════════
+    
     # [4/8]  Compare base models
-    # ════════════════════════════════════════════════════════════
+    
     print("\n[4/8] Comparing models...")
     # scale_pos_weight derived from raw (unbalanced) y_train
     pos = (y_train == 1).sum()
@@ -89,9 +89,9 @@ def main():
         scale_pos_weight=scale_pos_weight,
     )
 
-    # ════════════════════════════════════════════════════════════
+    
     # [5/8]  Tune best model with Optuna
-    # ════════════════════════════════════════════════════════════
+    
     print("\n[5/8] Tuning best model...")
     tuned_model, tuned_metrics, study = tune_best_model(
         X_train, y_train, X_train_res, y_train_res,
@@ -101,24 +101,24 @@ def main():
         scale_pos_weight=scale_pos_weight,
     )
 
-    # ════════════════════════════════════════════════════════════
+    
     # [6/8]  SHAP explanations
-    # ════════════════════════════════════════════════════════════
+    
     print("\n[6/8] Computing SHAP explanations...")
     shap_dict = compute_shap_values(tuned_model, X_test, feature_names)
     plot_shap_summary(shap_dict, os.path.join(ASSETS_DIR, "shap_summary.png"))
     plot_shap_bar(shap_dict, os.path.join(ASSETS_DIR, "shap_bar.png"))
     plot_shap_waterfall(shap_dict, os.path.join(ASSETS_DIR, "shap_waterfall.png"))
 
-    # ════════════════════════════════════════════════════════════
+    
     # [7/8]  Fairness analysis
-    # ════════════════════════════════════════════════════════════
+    
     print("\n[7/8] Fairness analysis...")
     fairness_results = run_fairness_analysis(tuned_model, X_test, y_test, artifacts)
 
-    # ════════════════════════════════════════════════════════════
+    
     # [8/8]  Save artefacts
-    # ════════════════════════════════════════════════════════════
+    
     print("\n[8/8] Saving artifacts...")
 
     # Trained model
