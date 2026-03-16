@@ -1,10 +1,3 @@
-"""
-Readmission Risk AI: Interactive Clinical Dashboard
-=====================================================
-Explainable ML system predicting 30-day hospital readmission risk
-for diabetic patients · UCI Diabetes 130-US Hospitals (1999–2008)
-"""
-
 import os, sys, json, joblib, warnings
 import numpy as np
 import pandas as pd
@@ -272,9 +265,9 @@ st.markdown(f"""
 ])
 
 
-# ==============================================================================
+
 #  TAB 1: OVERVIEW
-# ==============================================================================
+
 with tab_overview:
     st.markdown(
         "<h2 style='color:#0F3460; margin-bottom:2px;'>Overview</h2>"
@@ -394,9 +387,8 @@ After Youden's J threshold optimisation (threshold = 0.1517):
 """)
 
 
-# ==============================================================================
 #  TAB 2: PATIENT COHORT
-# ==============================================================================
+
 with tab_cohort:
     st.markdown(
         "<h2 style='color:#0F3460;'>Patient Cohort</h2>"
@@ -584,9 +576,8 @@ with tab_cohort:
         """, unsafe_allow_html=True)
 
 
-# ==============================================================================
 #  TAB 3: MODEL PERFORMANCE
-# ==============================================================================
+
 with tab_perf:
     st.markdown(
         "<h2 style='color:#0F3460;'>Model Performance</h2>",
@@ -720,9 +711,8 @@ with tab_perf:
         c4.metric("True Positives",            f"{int(tp_cm):,}")
 
 
-# ==============================================================================
 #  TAB 4: EXPLAINABILITY
-# ==============================================================================
+
 with tab_explain:
     st.markdown(
         "<h2 style='color:#0F3460;'>SHAP Explainability</h2>"
@@ -879,9 +869,8 @@ with tab_explain:
         """, unsafe_allow_html=True)
 
 
-# ==============================================================================
 #  TAB 5: EQUITY AUDIT
-# ==============================================================================
+
 with tab_equity:
     st.markdown(
         "<h2 style='color:#0F3460;'>Equity Audit</h2>"
@@ -1015,9 +1004,8 @@ with tab_equity:
             """, unsafe_allow_html=True)
 
 
-# ==============================================================================
 #  TAB 6: PATIENT SCREENER
-# ==============================================================================
+
 with tab_screener:
     st.markdown(
         "<h2 style='color:#0F3460;'>Patient Screener</h2>"
@@ -1276,9 +1264,8 @@ with tab_screener:
             st.warning(f"Could not generate SHAP explanation: {e}")
 
 
-# ==============================================================================
 #  TAB 7: ROI SIMULATOR
-# ==============================================================================
+
 with tab_roi:
     # ── Constants from actual test set (Youden threshold = 0.1517) ────────────
     TEST_TP, TEST_FP, TEST_FN, TEST_TN = 1033, 4718, 1230, 12888
