@@ -14,9 +14,8 @@ import os
 import numpy as np
 import pandas as pd
 
-# ──────────────────────────────────────────────────────────────
 # ICD-9 clinical groupings  (range-based, plus E/V prefix codes)
-# ──────────────────────────────────────────────────────────────
+
 ICD9_GROUPS = {
     "Infectious":       (1, 139),
     "Neoplasms":        (140, 239),
@@ -54,9 +53,7 @@ MEDICATION_COLS = [
 ]
 
 
-# ──────────────────────────────────────────────────────────────
 # Public helpers
-# ──────────────────────────────────────────────────────────────
 
 def map_icd9_to_group(code: str) -> str:
     """Map a single ICD-9 code string to a clinical group name."""
@@ -114,9 +111,7 @@ def _parse_ids_mapping(mapping_path: str) -> dict:
     return maps
 
 
-# ──────────────────────────────────────────────────────────────
 # Pipeline functions
-# ──────────────────────────────────────────────────────────────
 
 def load_raw_data(data_dir: str = "data/") -> pd.DataFrame:
     """Load diabetic_data.csv and return a raw DataFrame."""
@@ -207,9 +202,7 @@ def handle_missing_values(df: pd.DataFrame) -> pd.DataFrame:
     return df
 
 
-# ──────────────────────────────────────────────────────────────
 # Convenience: full preprocessing chain
-# ──────────────────────────────────────────────────────────────
 
 def run_preprocessing(data_dir: str = "data/") -> pd.DataFrame:
     """Execute the full data-loading pipeline and return a clean DataFrame."""
