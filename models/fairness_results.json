@@ -1,0 +1,104 @@
+{
+  "race": {
+    "group_name": "Race",
+    "group_metrics": {
+      "AfricanAmerican": {
+        "n": 3809,
+        "prevalence": 0.11000262536098714,
+        "predicted_positive_rate": 0.002887897085849304,
+        "auc": 0.6347505297766138,
+        "recall": 0.014319809069212411,
+        "precision": 0.5454545454545454,
+        "f1": 0.027906976744186046
+      },
+      "Asian": {
+        "n": 128,
+        "prevalence": 0.15625,
+        "predicted_positive_rate": 0.0078125,
+        "auc": 0.7574074074074074,
+        "recall": 0.05,
+        "precision": 1.0,
+        "f1": 0.09523809523809523
+      },
+      "Caucasian": {
+        "n": 14743,
+        "prevalence": 0.1162585633860137,
+        "predicted_positive_rate": 0.002509665604015465,
+        "auc": 0.6296825688104616,
+        "recall": 0.014002333722287048,
+        "precision": 0.6486486486486487,
+        "f1": 0.02741290691033695
+      },
+      "Hispanic": {
+        "n": 410,
+        "prevalence": 0.07804878048780488,
+        "predicted_positive_rate": 0.0,
+        "auc": 0.7465277777777777,
+        "recall": 0.0,
+        "precision": 0.0,
+        "f1": 0.0
+      },
+      "Other": {
+        "n": 304,
+        "prevalence": 0.09868421052631579,
+        "predicted_positive_rate": 0.0,
+        "auc": 0.5672749391727494,
+        "recall": 0.0,
+        "precision": 0.0,
+        "f1": 0.0
+      },
+      "Unknown": {
+        "n": 475,
+        "prevalence": 0.10105263157894737,
+        "predicted_positive_rate": 0.0,
+        "auc": 0.6257318501170961,
+        "recall": 0.0,
+        "precision": 0.0,
+        "f1": 0.0
+      }
+    },
+    "disparate_impact_ratio": 0.0
+  },
+  "age": {
+    "group_name": "Age Group",
+    "group_metrics": {
+      "40-60": {
+        "n": 5321,
+        "prevalence": 0.10787445968802857,
+        "predicted_positive_rate": 0.003946626573952265,
+        "auc": 0.6680863541910571,
+        "recall": 0.017421602787456445,
+        "precision": 0.47619047619047616,
+        "f1": 0.03361344537815126
+      },
+      "60-75": {
+        "n": 9523,
+        "prevalence": 0.11466974692848893,
+        "predicted_positive_rate": 0.0011550981833455844,
+        "auc": 0.6125317867993707,
+        "recall": 0.007326007326007326,
+        "precision": 0.7272727272727273,
+        "f1": 0.014505893019038985
+      },
+      "75+": {
+        "n": 3785,
+        "prevalence": 0.12523117569352707,
+        "predicted_positive_rate": 0.0,
+        "auc": 0.5866240520347085,
+        "recall": 0.0,
+        "precision": 0.0,
+        "f1": 0.0
+      },
+      "<40": {
+        "n": 1240,
+        "prevalence": 0.09919354838709678,
+        "predicted_positive_rate": 0.013709677419354839,
+        "auc": 0.7531788836241093,
+        "recall": 0.10569105691056911,
+        "precision": 0.7647058823529411,
+        "f1": 0.18571428571428572
+      }
+    },
+    "disparate_impact_ratio": 0.0
+  }
+}

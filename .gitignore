@@ -1,0 +1,24 @@
+# Dataset (large)
+data/
+
+# Python
+__pycache__/
+*.pyc
+*.egg-info/
+.venv/
+venv/
+env/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+
+# Claude
+.claude/
+
+# Jupyter
+.ipynb_checkpoints/

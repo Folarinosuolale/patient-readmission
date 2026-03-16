@@ -1,0 +1,170 @@
+{
+  "dataset_summary": {
+    "n_encounters": 99343,
+    "n_features": 24,
+    "positive_rate": 0.11388824577474005,
+    "feature_names": [
+      "time_in_hospital",
+      "num_lab_procedures",
+      "num_procedures",
+      "num_medications",
+      "number_outpatient",
+      "number_emergency",
+      "number_inpatient",
+      "number_diagnoses",
+      "num_active_medications",
+      "medication_change_count",
+      "has_insulin",
+      "insulin_changed",
+      "total_visits_prior",
+      "high_utilizer",
+      "diabetes_primary",
+      "num_comorbidities",
+      "long_stay",
+      "emergency_admission",
+      "age_numeric",
+      "med_changed",
+      "on_diabetes_med",
+      "a1c_ordinal",
+      "glu_ordinal",
+      "gender_male"
+    ]
+  },
+  "best_base_model": "LightGBM",
+  "tuned_model_name": "LightGBM (Tuned)",
+  "tuned_metrics": {
+    "model": "LightGBM (Tuned)",
+    "accuracy": 0.8867582666465348,
+    "auc": 0.6330630917662596,
+    "f1": 0.026816608996539794,
+    "precision": 0.6326530612244898,
+    "recall": 0.0136986301369863,
+    "specificity": 0.9989776212654777
+  },
+  "optuna_best_value": 0.6377063477521395,
+  "optuna_best_params": {
+    "n_estimators": 183,
+    "max_depth": 10,
+    "learning_rate": 0.058839627177337615,
+    "subsample": 0.8230080488698222,
+    "colsample_bytree": 0.6001406972005168,
+    "min_child_samples": 75,
+    "reg_alpha": 2.383207147516615e-07,
+    "reg_lambda": 1.6011660808369002
+  },
+  "fairness": {
+    "race": {
+      "disparate_impact_ratio": 0.0,
+      "group_metrics": {
+        "AfricanAmerican": {
+          "n": 3809,
+          "prevalence": 0.11000262536098714,
+          "predicted_positive_rate": 0.002887897085849304,
+          "auc": 0.6347505297766138,
+          "recall": 0.014319809069212411,
+          "precision": 0.5454545454545454,
+          "f1": 0.027906976744186046
+        },
+        "Asian": {
+          "n": 128,
+          "prevalence": 0.15625,
+          "predicted_positive_rate": 0.0078125,
+          "auc": 0.7574074074074074,
+          "recall": 0.05,
+          "precision": 1.0,
+          "f1": 0.09523809523809523
+        },
+        "Caucasian": {
+          "n": 14743,
+          "prevalence": 0.1162585633860137,
+          "predicted_positive_rate": 0.002509665604015465,
+          "auc": 0.6296825688104616,
+          "recall": 0.014002333722287048,
+          "precision": 0.6486486486486487,
+          "f1": 0.02741290691033695
+        },
+        "Hispanic": {
+          "n": 410,
+          "prevalence": 0.07804878048780488,
+          "predicted_positive_rate": 0.0,
+          "auc": 0.7465277777777777,
+          "recall": 0.0,
+          "precision": 0.0,
+          "f1": 0.0
+        },
+        "Other": {
+          "n": 304,
+          "prevalence": 0.09868421052631579,
+          "predicted_positive_rate": 0.0,
+          "auc": 0.5672749391727494,
+          "recall": 0.0,
+          "precision": 0.0,
+          "f1": 0.0
+        },
+        "Unknown": {
+          "n": 475,
+          "prevalence": 0.10105263157894737,
+          "predicted_positive_rate": 0.0,
+          "auc": 0.6257318501170961,
+          "recall": 0.0,
+          "precision": 0.0,
+          "f1": 0.0
+        }
+      }
+    },
+    "age": {
+      "disparate_impact_ratio": 0.0,
+      "group_metrics": {
+        "40-60": {
+          "n": 5321,
+          "prevalence": 0.10787445968802857,
+          "predicted_positive_rate": 0.003946626573952265,
+          "auc": 0.6680863541910571,
+          "recall": 0.017421602787456445,
+          "precision": 0.47619047619047616,
+          "f1": 0.03361344537815126
+        },
+        "60-75": {
+          "n": 9523,
+          "prevalence": 0.11466974692848893,
+          "predicted_positive_rate": 0.0011550981833455844,
+          "auc": 0.6125317867993707,
+          "recall": 0.007326007326007326,
+          "precision": 0.7272727272727273,
+          "f1": 0.014505893019038985
+        },
+        "75+": {
+          "n": 3785,
+          "prevalence": 0.12523117569352707,
+          "predicted_positive_rate": 0.0,
+          "auc": 0.5866240520347085,
+          "recall": 0.0,
+          "precision": 0.0,
+          "f1": 0.0
+        },
+        "<40": {
+          "n": 1240,
+          "prevalence": 0.09919354838709678,
+          "predicted_positive_rate": 0.013709677419354839,
+          "auc": 0.7531788836241093,
+          "recall": 0.10569105691056911,
+          "precision": 0.7647058823529411,
+          "f1": 0.18571428571428572
+        }
+      }
+    }
+  },
+  "optimal_threshold": 0.1517,
+  "tuned_metrics_at_optimal_threshold": {
+    "threshold": 0.1517,
+    "auc": 0.6331,
+    "recall": 0.4565,
+    "precision": 0.1796,
+    "f1": 0.2578,
+    "specificity": 0.732,
+    "tp": 1033,
+    "fp": 4718,
+    "tn": 12888,
+    "fn": 1230
+  }
+}
