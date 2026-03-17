@@ -1,5 +1,5 @@
-# Dataset (large)
-data/
+# Dataset — only exclude large raw downloads, not processed data
+data/raw/
 
 # Python
 __pycache__/
