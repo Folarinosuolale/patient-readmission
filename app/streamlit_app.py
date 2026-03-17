@@ -399,7 +399,13 @@ with tab_cohort:
     df_raw = load_raw_data()
     if df_raw is None:
         st.error("Raw data not found in `data/diabetic_data.csv`.")
-        st.stop()
+        st.markdown("Add `diabetic_data.csv` to the `data/` folder and redeploy.")
+        df_raw = pd.DataFrame(columns=["age","race","readmitted","patient_nbr",
+                                        "time_in_hospital","num_lab_procedures",
+                                        "num_procedures","num_medications",
+                                        "number_outpatient","number_emergency",
+                                        "number_inpatient","number_diagnoses",
+                                        "A1Cresult","insulin"])
 
     c1, c2, c3, c4 = st.columns(4)
     c1.metric("Total Encounters",        f"{len(df_raw):,}")
