@@ -41,7 +41,7 @@ Key feature groups:
       → CSV loading, ICD-9 mapping, deceased/hospice filtering, missing-value handling
 
 [2/8] Feature engineering
-      → Diagnosis grouping (18 ICD-9 clinical groups)
+      → Diagnosis grouping (21 ICD-9 clinical groups)
       → Medication aggregation (23 cols → 4 summary features)
       → Derived clinical features (utilisation, comorbidities, flags)
 
@@ -80,7 +80,7 @@ Key feature groups:
 ## Feature Engineering
 
 ### 1. ICD-9 Diagnosis Grouping
-The three diagnosis columns (`diag_1`, `diag_2`, `diag_3`) are mapped from raw ICD-9 codes to 18 clinical groups:
+The three diagnosis columns (`diag_1`, `diag_2`, `diag_3`) are mapped from raw ICD-9 codes to 21 clinical groups:
 
 | Group | ICD-9 Range | Description |
 |---|---|---|
@@ -105,7 +105,6 @@ The three diagnosis columns (`diag_1`, `diag_2`, `diag_3`) are mapped from raw I
 | Injury | 800–999 | Injury and poisoning |
 | External | E/V prefix | External causes and supplemental codes |
 | Other | — | Unrecognised or unparseable codes |
-
 
 ### 2. Medication Aggregation
 23 individual drug columns (metformin, insulin, glipizide…) are compressed into:
