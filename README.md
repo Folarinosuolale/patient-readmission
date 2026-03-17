@@ -2,6 +2,7 @@
 
 Explainable ML system for predicting **30-day hospital readmission risk** in diabetic patients, with SHAP-based explanations and fairness auditing across race and age groups.
 
+> **Live Dashboard** - [View the interactive Streamlit app](https://patient-readmission-fo.streamlit.app/)
 ---
 
 ## Problem Statement
