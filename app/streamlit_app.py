@@ -13,7 +13,7 @@ sys.path.insert(0, ROOT)
 
 # ── Page config ───────────────────────────────────────────────────────────────
 st.set_page_config(
-    page_title="Readmission Risk AI",
+    page_title="Readmission Risk Assessment System",
     page_icon="🏥",
     layout="wide",
     initial_sidebar_state="collapsed",
