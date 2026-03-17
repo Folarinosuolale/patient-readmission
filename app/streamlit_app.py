@@ -299,12 +299,12 @@ with tab_overview:
         c5.metric("Specificity",      f"{tm.get('specificity', 0):.3f}")
         c6.metric("Opt. Threshold",   f"{opt_t:.3f}")
 
-        with st.expander("📖 What do these metrics mean?"):
+        with st.expander("What do these metrics mean?"):
             st.markdown(f"""
 **All metrics are evaluated at the Youden-optimised decision threshold ({opt_t:.3f}), not the default 0.5.**
 
 - **ROC AUC ({tm.get('auc',0):.3f}):** Discrimination ability independent of threshold.
-  Published benchmarks on this exact dataset (Strack et al., 2014) report AUC 0.62–0.68. ✅ We are in range.
+  Published benchmarks on this exact dataset (Strack et al., 2014) report AUC 0.62–0.68. This means we are in range.
 
 - **Recall ({tm.get('recall',0):.3f}):** Of all patients who *were* readmitted, the model correctly flags
   this fraction. In clinical use, recall is the most critical metric: a missed high-risk patient may not
@@ -326,7 +326,7 @@ with tab_overview:
         col_a, col_b, col_c = st.columns(3)
 
         with col_a:
-            st.markdown("#### 🏥 Clinical Problem")
+            st.markdown("#### Clinical Problem")
             st.markdown("""
 Hospital readmissions within 30 days are a major quality-of-care indicator and cost driver.
 The CMS Hospital Readmissions Reduction Program (HRRP) financially penalises hospitals for
@@ -335,7 +335,7 @@ planning, follow-up care, and targeted resource allocation.
 """)
 
         with col_b:
-            st.markdown("#### 🤖 ML Approach")
+            st.markdown("#### ML Approach")
             st.markdown(f"""
 - **4 baseline models** compared (LogReg, RF, XGBoost, LightGBM)
 - **5-fold stratified cross-validation** on SMOTE-resampled training set
@@ -346,7 +346,7 @@ planning, follow-up care, and targeted resource allocation.
 """)
 
         with col_c:
-            st.markdown("#### 🔬 Top Risk Drivers (SHAP)")
+            st.markdown("#### Top Risk Drivers (SHAP)")
             top5 = importance.head(5)["feature"].tolist()
             st.markdown("Top 5 features by mean |SHAP| value:")
             for i, feat in enumerate(top5, 1):
@@ -355,7 +355,7 @@ planning, follow-up care, and targeted resource allocation.
         st.markdown("---")
 
         # ── Dataset overview ─────────────────────────────────────────────────
-        st.markdown("### 📋 Dataset & Pipeline Summary")
+        st.markdown("### Dataset & Pipeline Summary")
         col_left, col_right = st.columns([1, 2])
         with col_left:
             st.markdown(f"""
@@ -1299,7 +1299,7 @@ with tab_roi:
     """, unsafe_allow_html=True)
 
     # ── Parameter sliders (4 across) ─────────────────────────────────────────
-    st.markdown("### ⚙️ Hospital Parameters")
+    st.markdown("### Hospital Parameters")
     col_a, col_b, col_c, col_d = st.columns(4)
     with col_a:
         annual_volume     = st.slider(
@@ -1339,7 +1339,7 @@ with tab_roi:
     st.markdown("---")
 
     # ── KPI cards row ��────────────────────────────────────────────────────────
-    st.markdown("### 📊 Projected Annual Outcomes")
+    st.markdown("### Projected Annual Outcomes")
     c1, c2, c3, c4, c5 = st.columns(5)
     c1.metric(
         "Net Annual Benefit",
@@ -1420,7 +1420,7 @@ with tab_roi:
     st.markdown("---")
 
     # ── Threshold sensitivity: ROI across operating points ────────────────────
-    st.markdown("### 📉 ROI Sensitivity Across Threshold Operating Points")
+    st.markdown("### ROI Sensitivity Across Threshold Operating Points")
     st.markdown("""
     <div class="explain-box">
     How does ROI change as you move the classification threshold?
@@ -1543,7 +1543,7 @@ with tab_roi:
     st.markdown("---")
 
     # ── Strategy comparison table ─────────────────────────────────────────────
-    st.markdown("### ⚖️ Strategy Comparison")
+    st.markdown("### Strategy Comparison")
 
     pos_rate = TEST_POS / TEST_SIZE  # ~11.4%
 
@@ -1557,7 +1557,7 @@ with tab_roi:
 
     comp_table = pd.DataFrame([
         {
-            "Strategy":                  "❌  No Screening",
+            "Strategy":                  "No Screening",
             "Patients Flagged / Year":   "0",
             "True Readmissions Caught":  "0",
             "Annual Intervention Cost":  "$0",
@@ -1566,7 +1566,7 @@ with tab_roi:
             "ROI":                       "n/a",
         },
         {
-            "Strategy":                  "🔵  Universal Intervention (flag all)",
+            "Strategy":                  "Universal Intervention (flag all)",
             "Patients Flagged / Year":   f"{int(univ_flagged):,}",
             "True Readmissions Caught":  f"{int(univ_TP):,}",
             "Annual Intervention Cost":  f"${univ_cost:,.0f}",
@@ -1575,7 +1575,7 @@ with tab_roi:
             "ROI":                       f"{univ_roi:.0f}%",
         },
         {
-            "Strategy":                  "✅  This Model (Youden Threshold)",
+            "Strategy":                  "This Model (Youden Threshold)",
             "Patients Flagged / Year":   f"{flagged_pa:,}",
             "True Readmissions Caught":  f"{int(annual_TP):,}",
             "Annual Intervention Cost":  f"${costs:,.0f}",
