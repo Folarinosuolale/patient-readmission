@@ -233,7 +233,7 @@ st.markdown(f"""
             flex-wrap: wrap; gap: 8px;">
   <div>
     <span style="color: white; font-size: 1.3rem; font-weight: 700; letter-spacing: -0.3px;">
-      🏥 Readmission Risk AI
+      🏥 Readmission Risk Assessment System
     </span>
     <span style="color: #93C5FD; font-size: 0.82rem; margin-left: 12px;">
       UCI Diabetes 130-US Hospitals &nbsp;·&nbsp; 99,343 encounters &nbsp;·&nbsp; LightGBM + SHAP
